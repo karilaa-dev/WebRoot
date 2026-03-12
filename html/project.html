@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <title>Project Portfolio</title>
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="../css/style.css" />
+        <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon" />
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <a class="navbar-brand" href="../index.html">Kyryl Andreiev</a>
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarNav"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="webresources.html"
+                            >Web Resources</a
+                        >
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="project.html">Project</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://dev320.karilaa.dev"
+                            >Legacy</a
+                        >
+                    </li>
+                    <li class="nav-item">
+                        <a
+                            class="nav-link"
+                            href="https://dev320.karilaa.dev/http-server"
+                            >Vanilla</a
+                        >
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container mt-4">
+            <!-- Project Header -->
+            <div class="resource-card">
+                <h2>Some Emissions</h2>
+                <p style="font-size: 18px; margin-bottom: 10px">
+                    <strong>Team Burnt Cheese</strong> &mdash; Kyryl Andreiev,
+                    Jarod Atienzo, Dylan Verallo, Jesse Wattenhofer
+                </p>
+                <p style="font-size: 16px">
+                    DEV320 Advanced Web Development &bull; Winter/Spring 2026
+                    &bull; Bellevue College
+                </p>
+                <p style="font-size: 16px">
+                    <a
+                        href="https://github.com/karilaa-dev/BurntCheeseProject"
+                        target="_blank"
+                        style="color: #64b5f6"
+                    >
+                        GitHub Repository
+                    </a>
+                </p>
+            </div>
+
+            <!-- Problem Summary -->
+            <div class="resource-card">
+                <h3>The Problem</h3>
+                <p>
+                    Carbon emissions are a major factor in global warming, yet
+                    most people don't have easy access to real-time data about
+                    their local energy grid's carbon footprint. Our team set out
+                    to build a tool that makes this data accessible to anyone.
+                </p>
+            </div>
+
+            <!-- Our Solution -->
+            <div class="resource-card">
+                <h3>Our Solution</h3>
+                <p>
+                    <strong>Some Emissions</strong> lets users enter a city name
+                    and instantly see the current carbon intensity for that
+                    region. The app uses the
+                    <a
+                        href="https://geocode.maps.co/"
+                        target="_blank"
+                        style="color: #64b5f6"
+                        >Geocode Maps API</a
+                    >
+                    to convert the city into coordinates, then queries the
+                    <a
+                        href="https://app.electricitymaps.com/"
+                        target="_blank"
+                        style="color: #64b5f6"
+                        >Electricity Maps API</a
+                    >
+                    to retrieve carbon intensity (gCO2/kWh), renewable energy
+                    percentage, and the full power source breakdown, all
+                    displayed with a Low/Moderate/High interpretation.
+                </p>
+            </div>
+
+            <!-- Technical Architecture -->
+            <div class="resource-card">
+                <h3>Technical Architecture</h3>
+                <p>
+                    The app is a single-page application with a backend that
+                    handles API keys and external calls securely over HTTPS. The
+                    domain model has three core components:
+                    <strong>CitySearch</strong> (user input),
+                    <strong>Geocoding</strong> (coordinate conversion), and
+                    <strong>Electricity Maps</strong>
+                    (carbon/energy data retrieval). CI/CD and project tracking
+                    are managed through GitHub.
+                </p>
+            </div>
+
+            <!-- Project Management -->
+            <div class="resource-card">
+                <h3>How We Worked</h3>
+                <p>
+                    Jesse led the team, Jarod handled communications, Dylan
+                    managed documentation, and I (Kyryl) served as merge
+                    manager. We tracked progress through weekly reports and a
+                    formal WBS with acceptance reviews. By week 8 we had
+                    completed over 30 tasks across documentation, API
+                    integration, frontend development, and CI/CD setup.
+                </p>
+            </div>
+
+            <!-- My Contributions -->
+            <div class="resource-card">
+                <h3>My Contributions</h3>
+                <p>
+                    I served as <strong>merge manager</strong> for all GitHub
+                    merges, authored the
+                    <strong>API endpoint documentation and data models</strong>,
+                    created the <strong>sequence diagrams</strong>, led
+                    <strong>framework/library selection</strong>, set up the
+                    <strong>CI/CD pipeline</strong> and
+                    <strong>GitHub project board</strong>, and helped test the
+                    APIs early on. Going forward, I'm building out the backend,
+                    local storage integration, and UI polish.
+                </p>
+            </div>
+
+            <!-- Documentation Highlights -->
+            <div class="resource-card">
+                <h3>Documentation Highlights</h3>
+                <p>
+                    Our SRS covers six user stories, use case scenarios with
+                    test cases, activity diagrams, class diagrams, ER diagrams,
+                    CRC cards, sequence diagrams, and full API documentation. A
+                    key design decision was chaining the Geocode API as a
+                    preprocessing step so users just type a city name while
+                    coordinate conversion happens transparently on the backend.
+                </p>
+            </div>
+
+            <!-- My Experience -->
+            <div class="resource-card">
+                <h3>My Experience</h3>
+                <p>
+                    Managing merges across four contributors taught me the value
+                    of clean branching and clear communication. Documenting
+                    every API endpoint before coding made implementation
+                    smoother, and setting up CI/CD early caught integration
+                    issues fast. The project reinforced my interest in backend
+                    and infrastructure work.
+                </p>
+            </div>
+
+            <!-- Link to App -->
+            <div class="resource-card">
+                <h3>The App</h3>
+                <p>
+                    Some Emissions is under active development. Source code is
+                    on
+                    <a
+                        href="https://github.com/karilaa-dev/BurntCheeseProject"
+                        target="_blank"
+                        style="color: #64b5f6"
+                        >GitHub</a
+                    >.
+                </p>
+            </div>
+
+            <div class="text-center mb-5">
+                <a href="../index.html" class="btn btn-primary">Back to Home</a>
+            </div>
+        </div>
+
+        <script
+            src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"
+        ></script>
+    </body>
+</html>
