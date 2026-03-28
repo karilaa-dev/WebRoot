@@ -61,14 +61,22 @@
             <div class="resource-card">
                 <h2>Some Emissions</h2>
                 <p style="font-size: 18px; margin-bottom: 10px">
-                    <strong>Team Burnt Cheese</strong> &mdash; Kyryl Andreiev,
-                    Jarod Atienzo, Dylan Verallo, Jesse Wattenhofer
+                    <b>Team Burnt Cheese</b> - Kyryl Andreiev, Jarod Atienzo,
+                    Dylan Verallo, Jesse Wattenhofer
                 </p>
                 <p style="font-size: 16px">
                     DEV320 Advanced Web Development &bull; Winter/Spring 2026
                     &bull; Bellevue College
                 </p>
                 <p style="font-size: 16px">
+                    <a
+                        href="https://some-emissions.karilaa.dev/"
+                        target="_blank"
+                        style="color: #64b5f6"
+                    >
+                        Live App
+                    </a>
+                    &bull;
                     <a
                         href="https://github.com/karilaa-dev/BurntCheeseProject"
                         target="_blank"
@@ -81,123 +89,278 @@
 
             <!-- Problem Summary -->
             <div class="resource-card">
-                <h3>The Problem</h3>
+                <h3>The problem</h3>
                 <p>
-                    Carbon emissions are a major factor in global warming, yet
-                    most people don't have easy access to real-time data about
-                    their local energy grid's carbon footprint. Our team set out
-                    to build a tool that makes this data accessible to anyone.
+                    Most people have no idea how clean or dirty their local
+                    power grid is right now. That data exists, but it's buried
+                    in APIs and government reports nobody reads. We wanted to
+                    put it in front of anyone who types in a city name.
                 </p>
             </div>
 
             <!-- Our Solution -->
             <div class="resource-card">
-                <h3>Our Solution</h3>
+                <h3>Our solution</h3>
                 <p>
-                    <strong>Some Emissions</strong> lets users enter a city name
-                    and instantly see the current carbon intensity for that
-                    region. The app uses the
+                    You type a city name into Some Emissions. The app calls the
                     <a
                         href="https://geocode.maps.co/"
                         target="_blank"
                         style="color: #64b5f6"
                         >Geocode Maps API</a
                     >
-                    to convert the city into coordinates, then queries the
+                    to turn that into coordinates, then hits the
                     <a
                         href="https://app.electricitymaps.com/"
                         target="_blank"
                         style="color: #64b5f6"
                         >Electricity Maps API</a
                     >
-                    to retrieve carbon intensity (gCO2/kWh), renewable energy
-                    percentage, and the full power source breakdown, all
-                    displayed with a Low/Moderate/High interpretation.
+                    to get the carbon intensity (gCO2/kWh), carbon-free energy
+                    percentage, renewable energy percentage, total electricity
+                    load, and a full power source breakdown. The result shows up
+                    with a simple Low/Moderate/High label so you don't need to
+                    know what 95 gCO2/kWh actually means.
                 </p>
             </div>
 
             <!-- Technical Architecture -->
             <div class="resource-card">
-                <h3>Technical Architecture</h3>
+                <h3>Technical architecture</h3>
                 <p>
-                    The app is a single-page application with a backend that
-                    handles API keys and external calls securely over HTTPS. The
-                    domain model has three core components:
-                    <strong>CitySearch</strong> (user input),
-                    <strong>Geocoding</strong> (coordinate conversion), and
-                    <strong>Electricity Maps</strong>
-                    (carbon/energy data retrieval). CI/CD and project tracking
-                    are managed through GitHub.
+                    The backend runs on NestJS 11 with TypeScript. Controllers
+                    take HTTP requests and hand off the actual work to service
+                    classes. The frontend is plain HTML5 and JavaScript with
+                    Tailwind CSS, served as static files by the same NestJS app
+                    over HTTPS.
+                </p>
+                <p>
+                    There are three domain components. CitySearch takes the
+                    user's input and validates it. That gets passed to
+                    Geocoding, which turns the city name into latitude/longitude
+                    via the Geocode Maps API. ElectricityMaps then uses those
+                    coordinates to pull carbon intensity, renewable percentage,
+                    total load, and the electricity mix. All API keys live
+                    server-side in NestJS ConfigService, so nothing sensitive
+                    reaches the browser.
+                </p>
+                <p>
+                    Both external APIs (Geocode Maps and Electricity Maps) go
+                    through a single reusable adapter in the CarbonService. One
+                    <code>/api/allCityData</code> endpoint fires off all five
+                    Electricity Maps calls in parallel with
+                    <code>Promise.allSettled</code>, so if one call fails the
+                    rest still come back. We use GitHub for CI/CD and project
+                    tracking. For deployment we use Dokploy, an open-source
+                    self-hostable platform similar to Vercel or Netlify that
+                    runs on our own server. It auto-deploys on every push to
+                    main, and a full build takes about a minute, so the live
+                    site is always running the latest version.
                 </p>
             </div>
 
             <!-- Project Management -->
             <div class="resource-card">
-                <h3>How We Worked</h3>
+                <h3>How we worked</h3>
                 <p>
-                    Jesse led the team, Jarod handled communications, Dylan
-                    managed documentation, and I (Kyryl) served as merge
-                    manager. We tracked progress through weekly reports and a
-                    formal WBS with acceptance reviews. By week 8 we had
-                    completed over 30 tasks across documentation, API
-                    integration, frontend development, and CI/CD setup.
+                    Jesse was team lead, Jarod ran communications, Dylan owned
+                    documentation, and I (Kyryl) was the merge manager, meaning
+                    every pull request went through me before it hit main. We
+                    split the work using a Work Breakdown Structure with four
+                    tracks: documentation, API integration, frontend, and CI/CD.
+                    By week 8 we had closed over 30 tasks, each with an
+                    acceptance review before it counted as done.
+                </p>
+                <p>
+                    Everyone worked on their own branch, opened a PR, and I
+                    reviewed and merged it. A GitHub project board showed what
+                    was in progress, what was blocked, and what was done. We
+                    wrote weekly status reports and ran retrospectives when
+                    things felt off. Dylan built the HTML/CSS layout, Jesse
+                    handled responsivity and accessibility, Jarod did UI/UX and
+                    animations, and I wrote the API logic and data-fetching
+                    layer.
                 </p>
             </div>
 
             <!-- My Contributions -->
             <div class="resource-card">
-                <h3>My Contributions</h3>
+                <h3>My contributions</h3>
                 <p>
-                    I served as <strong>merge manager</strong> for all GitHub
-                    merges, authored the
-                    <strong>API endpoint documentation and data models</strong>,
-                    created the <strong>sequence diagrams</strong>, led
-                    <strong>framework/library selection</strong>, set up the
-                    <strong>CI/CD pipeline</strong> and
-                    <strong>GitHub project board</strong>, and helped test the
-                    APIs early on. Going forward, I'm building out the backend,
-                    local storage integration, and UI polish.
+                    Every pull request went through me. I set up the GitHub
+                    project board, the branching rules, and managed all merges.
+                    I also wrote the API endpoint documentation and data models,
+                    drew the sequence diagrams, and led framework and library
+                    selection.
+                </p>
+                <p>
+                    For the actual code, I built the energy data integration
+                    with the Electricity Maps API, wrote the carbon percentage
+                    calculations, and worked on how the data gets displayed on
+                    the frontend. I set up the server deployment through Dokploy
+                    too, with auto-deploy on push to main.
                 </p>
             </div>
 
             <!-- Documentation Highlights -->
             <div class="resource-card">
-                <h3>Documentation Highlights</h3>
+                <h3>Documentation highlights</h3>
                 <p>
-                    Our SRS covers six user stories, use case scenarios with
-                    test cases, activity diagrams, class diagrams, ER diagrams,
-                    CRC cards, sequence diagrams, and full API documentation. A
-                    key design decision was chaining the Geocode API as a
-                    preprocessing step so users just type a city name while
-                    coordinate conversion happens transparently on the backend.
+                    The SRS has six user stories, use case scenarios with test
+                    cases, activity diagrams, class diagrams, ER diagrams, CRC
+                    cards, sequence diagrams, and API docs. One decision that
+                    shaped the whole app was chaining the Geocode API as a
+                    preprocessing step: users just type a city name and the
+                    backend handles coordinate lookup on its own.
+                </p>
+                <p>
+                    Here's the user story that drove most of the architecture:
+                    "As a user, I want to enter a city name so that I can
+                    retrieve carbon intensity data for my region." Most of the
+                    request flow came out of that, from the search form through
+                    geocoding to the final color-coded intensity display.
+                </p>
+                <p>
+                    One pattern that saved us a lot of repeated code was a
+                    generic API adapter in the CarbonService. Instead of writing
+                    separate fetch logic for each Electricity Maps endpoint, we
+                    wrote one
+                    <code>fetchFromElectricityMaps&lt;T&gt;</code> method. It
+                    takes an endpoint name and coordinates, adds auth headers,
+                    and returns typed data. Adding a new endpoint after that was
+                    a few lines:
+                </p>
+                <pre
+                    style="
+                        background: #1a1a1a;
+                        padding: 15px;
+                        border-radius: 8px;
+                        overflow-x: auto;
+                        font-size: 14px;
+                        color: #e0e0e0;
+                    "
+                >
+<code>private async fetchFromElectricityMaps&lt;T&gt;(
+  endpoint: string, lat: string, lon: string,
+): Promise&lt;T&gt; {
+  const apiKey = this.configService.get&lt;string&gt;('ELECTRICITYMAPS_API_KEY');
+  const url = `https://api.electricitymaps.com/v3/${endpoint}?lat=${lat}&amp;lon=${lon}`;
+  const response = await firstValueFrom(
+    this.httpsService.get&lt;T&gt;(url, { headers: { 'auth-token': apiKey } }),
+  );
+  return response.data;
+}</code></pre>
+                <p>
+                    Our GitHub project board tracked every task from backlog to
+                    done. During retrospectives it made it easy to see where
+                    things were stuck.
                 </p>
             </div>
 
-            <!-- My Experience -->
+            <!-- Next Steps -->
             <div class="resource-card">
-                <h3>My Experience</h3>
+                <h3>What comes next</h3>
                 <p>
-                    Managing merges across four contributors taught me the value
-                    of clean branching and clear communication. Documenting
-                    every API endpoint before coding made implementation
-                    smoother, and setting up CI/CD early caught integration
-                    issues fast. The project reinforced my interest in backend
-                    and infrastructure work.
+                    We didn't get to everything we originally planned. Local
+                    storage is next so users can save favorite cities without
+                    re-searching every time. After that we want a history view
+                    that shows how a region's carbon intensity changes over
+                    time, and a comparison mode for viewing two cities
+                    side-by-side.
+                </p>
+                <p>
+                    The full system vision in our SRS also includes historical
+                    carbon intensity tracking, transportation emissions
+                    calculations (car, bus, train, etc.), and personalized
+                    recommendations for reducing your footprint. Those were
+                    always out of scope for this quarter but they're where the
+                    project would go next. On the backend, we'd like to add
+                    domain-level exception classes like
+                    <code>CityNotFound</code> and an adapter layer so the
+                    services aren't tied to the exact shape of the external API
+                    responses.
+                </p>
+            </div>
+
+            <!-- My Experience (50% of final grade) -->
+            <div class="resource-card">
+                <h3>My experience</h3>
+
+                <p>
+                    Being merge manager meant reading everyone's code every
+                    week, which forced me to understand parts of the app I
+                    didn't write. I got faster at spotting issues in a diff
+                    before they hit main. I also wrote the API docs before any
+                    backend code existed. At the time it felt like busywork, but
+                    when I actually sat down to implement the endpoints I
+                    already knew the data shapes and error cases. CI/CD went in
+                    during week one, so broken builds showed up in minutes.
+                    Dokploy went in around the same time. Once it was wired to
+                    main, every merge went live in about a minute with no manual
+                    steps.
+                </p>
+
+                <p>
+                    This is the first time I've built software with a team where
+                    everyone had a real role and real ownership. Coordinating
+                    schedules was harder than I expected, but watching four
+                    separate pieces come together into something that actually
+                    worked made it worth the friction.
+                </p>
+
+                <p>
+                    Before this project, requirements analysis and design
+                    patterns were things I'd only read about. Now I've actually
+                    written an SRS that drove real implementation decisions. The
+                    backend and infrastructure skills I picked up (NestJS,
+                    TypeScript, CI/CD, API design) are the kind of work I want
+                    to do after graduation.
+                </p>
+
+                <p>
+                    I'm better at process and organization than I thought.
+                    Setting up the GitHub board, the CI pipeline, the branching
+                    rules, that came naturally. The hardest moment was early on
+                    when the Electricity Maps API returned data in a different
+                    structure than their docs described. I kept trying to force
+                    my code to match the docs until I finally just logged the
+                    raw responses. The actual fix took five minutes after that.
+                </p>
+
+                <p>
+                    Advice for anyone starting something similar: write your API
+                    contracts first, set up CI/CD on day one, pick a merge
+                    workflow early, and talk to your team more than you think
+                    you need to.
                 </p>
             </div>
 
             <!-- Link to App -->
             <div class="resource-card">
-                <h3>The App</h3>
+                <h3>The app</h3>
                 <p>
-                    Some Emissions is under active development. Source code is
-                    on
+                    Some Emissions is live at
+                    <a
+                        href="https://some-emissions.karilaa.dev/"
+                        target="_blank"
+                        style="color: #64b5f6"
+                        >some-emissions.karilaa.dev</a
+                    >. Source code is on
                     <a
                         href="https://github.com/karilaa-dev/BurntCheeseProject"
                         target="_blank"
                         style="color: #64b5f6"
                         >GitHub</a
                     >.
+                </p>
+                <h4>How to use</h4>
+                <p>
+                    Type a city name into the search field (try "Seattle") and
+                    press Enter. The app looks up the coordinates, pulls the
+                    latest grid data, and shows you the carbon intensity in
+                    gCO2/kWh with a color-coded Low/Moderate/High label, the
+                    renewable energy percentage, and a breakdown of where the
+                    power is coming from. No account needed.
                 </p>
             </div>
 
